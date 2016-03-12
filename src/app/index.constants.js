@@ -2,6 +2,5 @@
     'use strict';
 
     angular
-        .module('frontendEnglishRouletteV03')
-            .constant('test', 'test');
+        .module('frontendEnglishRouletteV03');
 })();

@@ -9,6 +9,7 @@
             'ngSanitize',
             'ngMessages',
             'ngAria',
+            'ngStorage',
             'restangular',
             'ui.router',
             'ui.bootstrap'
