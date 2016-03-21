@@ -6,23 +6,23 @@
         .config(config);
 
     /** @ngInject */
-    function config($httpProvider, RestangularProvider)
+    function config($httpProvider, RestangularProvider, backendUrl)
     {
-        RestangularProvider.setBaseUrl('http://localhost:8000');
+        RestangularProvider.setBaseUrl(backendUrl);
 
-        $httpProvider.interceptors.push(function ($log) {
+        $httpProvider.interceptors.push(function ($log, $q, preloader) {
             return {
                 request: function (config) {
-                    $log.debug('start ajax');
+                    preloader.show();
                     return config;
                 },
                 response: function (response) {
-                    $log.debug('success ajax');
+                    preloader.hide();
                     return response;
                 },
                 responseError: function (response) {
-                    $log.debug('error ajax');
-                    return response;
+                    preloader.hide();
+                    return $q.reject(response);
                 }
             };
         });

@@ -1,3 +1,38 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 61px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #ccc;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #aaa;
+}
+
+.base-preloader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, .3);
+    display: none;
+}
+
+.base-preloader > img {
+    position: absolute;
+    top: 44.6%;
+    left: 47%;
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;

@@ -1,0 +1,14 @@
+.navbar-default {
+    border: none;
+    border-radius: 0;
+    background-color: #ccc;
+    border-bottom: 1px solid #aaa;
+}
+
+.navbar-collapse.in {
+    overflow-y: hidden;
+}
+
+.collapsing, .in {
+    display:block;
+}

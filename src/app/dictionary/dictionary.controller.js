@@ -6,8 +6,8 @@
         .controller('DictionaryController', DictionaryController);
 
     /** @ngInject */
-    function DictionaryController ($scope, $localStorage, $log, greeting)
+    function DictionaryController($scope)
     {
-        $log.debug(greeting);
+
     }
 })();

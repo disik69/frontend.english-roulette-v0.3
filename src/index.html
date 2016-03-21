@@ -1,46 +1,97 @@
 <!doctype html>
 <html ng-app="frontendEnglishRouletteV03">
-  <head>
-    <meta charset="utf-8">
-    <title>EnglishRoulette</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <head>
+        <meta charset="utf-8">
+        <title>EnglishRoulette</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+        <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+        <!-- bower:css -->
+        <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+        <!-- endbower -->
+        <!-- endbuild -->
 
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
-    <!-- inject:css -->
-    <!-- css files will be automatically insert here -->
-    <!-- endinject -->
-    <!-- endbuild -->
-  </head>
-  <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+        <!-- build:css({.tmp/serve,src}) styles/app.css -->
+        <!-- inject:css -->
+        <!-- css files will be automatically insert here -->
+        <!-- endinject -->
+        <!-- endbuild -->
 
-    <div ui-view></div>
+        <!-- build:js(src) scripts/vendor.js -->
+        <!-- bower:js -->
+        <!-- run `gulp inject` to automatically populate bower script dependencies -->
+        <!-- endbower -->
+        <!-- endbuild -->
+    </head>
+    <body ng-cloak>
+        <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+            your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-    <!-- build:js(src) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- run `gulp inject` to automatically populate bower script dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+        <div class="base-preloader">
+            <img src="assets/images/preloader.gif" alt="preloader">
+        </div>
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-    <!-- inject:js -->
-    <!-- js files will be automatically insert here -->
-    <!-- endinject -->
+        <nav class="navbar navbar-default" ng-controller="NavbarController">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" ng-click="switchMinimizeCollapse()">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a ui-sref="dictionary" class="navbar-brand">EnglishRoulette</a>
+                </div>
 
-    <!-- inject:partials -->
-    <!-- angular templates will be automatically converted in js and inserted here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" uib-collapse="minimizeCollapsed">
+                    <ul class="nav navbar-nav">
+                        <li ui-sref-active="active" simple-menu-item ng-show="isGuest()"><a ui-sref="signin">Signin</a></li>
+                        <li ui-sref-active="active" simple-menu-item ng-show="isGuest()"><a ui-sref="signup">Signup</a></li>
+                        <li ui-sref-active="active" simple-menu-item ng-show="isUser()"><a ui-sref="dictionary">Dictionary</a></li>
+                        <li class="dropdown" dropdown-menu-item="collapseCycle" ng-show="isUser()">
+                            <a class="dropdown-toggle" role="button">Exercise<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li ui-sref-active="active"><a ui-sref="foreign-native">Foreign -> Native</a></li>
+                                <li ui-sref-active="active"><a ui-sref="native-foreign">Native -> Foreign</a></li>
+                                <li ui-sref-active="active"><a ui-sref="repetition">Repetition</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" ng-show="isUser() || isAdmin()">
+                        <li class="dropdown" dropdown-menu-item="collapseCycle">
+                            <a class="dropdown-toggle" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{passport.name}}</a>
+                            <ul class="dropdown-menu">
+                                <li ng-show="isUser()"><a>for user...</a></li>
+                                <li ng-show="isAdmin()"><a>for admin...</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li role="button"><a ng-click="signout()">Signout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
 
-  </body>
+        <div class="container" ui-view>
+        </div>
+
+        <footer>EnglishRoulette&COPY; {{thisTime | date:'yyyy'}}</footer>
+
+        <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+        <!-- inject:js -->
+        <!-- js files will be automatically insert here -->
+        <!-- endinject -->
+
+        <!-- inject:partials -->
+        <!-- angular templates will be automatically converted in js and inserted here -->
+        <!-- endinject -->
+        <!-- endbuild -->
+
+    </body>
 </html>

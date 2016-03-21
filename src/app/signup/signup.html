@@ -1,1 +1,52 @@
-signup
+<div class="row">
+    <div class="col-xs-offset-4 col-xs-4" alert-stack></div>
+</div>
+<div class="row">
+    <form name="signupForm" novalidate ng-submit="signup()" class="col-xs-offset-4 col-xs-4">
+        <fieldset>
+            <legend>User</legend>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" name="name" required maxlength="100" ng-model="user.name" class="form-control" placeholder="name">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" name="email" required maxlength="60" ng-model="user.email" unique-email class="form-control" placeholder="email">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Password</legend>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="password" name="password" ng-minlength="6" required maxlength="100" ng-model="user.password" class="form-control" placeholder="password">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="password" name="repeated-password" ng-model="repeatedPassword" repeated-password="user.password" class="form-control" placeholder="repeated password">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Captcha</legend>
+            <div class="form-group">
+                <img ng-src="{{captchaSrc}}" alt="captcha" class="img-thumbnail">
+                <a class="btn btn-default" ng-click="resetCaptchaSrc()"><span class="glyphicon glyphicon-repeat"></span></a>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="captcha" ng-model="user.captcha" required placeholder="captcha">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <div class="form-group"><input type="submit" value="Ok" class="form-control btn btn-primary"></div>
+    </form>
+</div>
