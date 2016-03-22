@@ -10,6 +10,10 @@
     {
         $rootScope.thisTime = Date.now();
 
+        $rootScope.fireCollapseCycle = function () {
+            $rootScope.$broadcast('collapseCycle');
+        };
+
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
             switch (error) {
                 case 'guest':

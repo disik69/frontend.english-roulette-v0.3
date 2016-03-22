@@ -9,7 +9,6 @@
     function NavbarController($scope, $log, passport, $state, $localStorage)
     {
         $scope.passport = passport;
-        $scope.collapseCycle = true;
         $scope.minimizeCollapsed = true;
 
         $scope.switchMinimizeCollapse = function () {
@@ -31,10 +30,6 @@
         $scope.signout = function () {
             delete $localStorage.accessToken;
             $state.go('signin');
-        };
-
-        $scope.switchCollapseCycle = function () {
-            $scope.collapseCycle = ! $scope.collapseCycle;
         };
     }
 })();

@@ -6,12 +6,10 @@
         .directive('dropdownMenuItem', dropdownMenuItem);
 
     /** @ngInject */
-    function dropdownMenuItem($compile, $log)
+    function dropdownMenuItem($compile, $log, $rootScope)
     {
         return {
-            scope: {
-                collapseCycle: '=dropdownMenuItem'
-            },
+            scope: {},
             link: function (scope, element, attrs) {
                 var enabledCollapseCycle = true;
 
@@ -22,7 +20,7 @@
                     scope.collapsed = ! scope.collapsed;
                 };
 
-                scope.$watch('collapseCycle', function () {
+                $rootScope.$on(attrs.dropdownMenuItem, function () {
                     if (enabledCollapseCycle) {
                         scope.collapsed = true;
                     } else {
