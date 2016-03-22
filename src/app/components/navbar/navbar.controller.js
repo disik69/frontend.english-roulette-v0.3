@@ -31,6 +31,10 @@
         $scope.signout = function () {
             delete $localStorage.accessToken;
             $state.go('signin');
-        }
+        };
+
+        $scope.switchCollapseCycle = function () {
+            $scope.collapseCycle = ! $scope.collapseCycle;
+        };
     }
 })();

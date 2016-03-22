@@ -25,7 +25,7 @@
         <!-- endbower -->
         <!-- endbuild -->
     </head>
-    <body ng-cloak>
+    <body ng-cloak ng-controller="NavbarController" ng-click="switchCollapseCycle()">
         <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
@@ -35,7 +35,7 @@
             <img src="assets/images/preloader.gif" alt="preloader">
         </div>
 
-        <nav class="navbar navbar-default" ng-controller="NavbarController">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -51,9 +51,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" uib-collapse="minimizeCollapsed">
                     <ul class="nav navbar-nav">
-                        <li ui-sref-active="active" simple-menu-item ng-show="isGuest()"><a ui-sref="signin">Signin</a></li>
-                        <li ui-sref-active="active" simple-menu-item ng-show="isGuest()"><a ui-sref="signup">Signup</a></li>
-                        <li ui-sref-active="active" simple-menu-item ng-show="isUser()"><a ui-sref="dictionary">Dictionary</a></li>
+                        <li ui-sref-active="active" ng-show="isGuest()"><a ui-sref="signin">Signin</a></li>
+                        <li ui-sref-active="active" ng-show="isGuest()"><a ui-sref="signup">Signup</a></li>
+                        <li ui-sref-active="active" ng-show="isUser()"><a ui-sref="dictionary">Dictionary</a></li>
                         <li class="dropdown" dropdown-menu-item="collapseCycle" ng-show="isUser()">
                             <a class="dropdown-toggle" role="button">Lesson<span class="caret"></span></a>
                             <ul class="dropdown-menu">

@@ -3,8 +3,7 @@
 
     angular
         .module('frontendEnglishRouletteV03')
-        .directive('dropdownMenuItem', dropdownMenuItem)
-        .directive('simpleMenuItem', simpleMenuItem);
+        .directive('dropdownMenuItem', dropdownMenuItem);
 
     /** @ngInject */
     function dropdownMenuItem($compile, $log)
@@ -21,7 +20,6 @@
                 scope.switchCollapse = function () {
                     enabledCollapseCycle = false;
                     scope.collapsed = ! scope.collapsed;
-                    scope.collapseCycle = ! scope.collapseCycle;
                 };
 
                 scope.$watch('collapseCycle', function () {
@@ -31,10 +29,6 @@
                         enabledCollapseCycle = true;
                     }
                 });
-
-                scope.collapse = function () {
-                    scope.collapsed = true;
-                };
 
                 scope.doExpanding = function () {
                     element.addClass('open');
@@ -51,23 +45,10 @@
                 dropdownMenu.attr('uib-collapse', 'collapsed');
                 dropdownMenu.attr('expanding', 'doExpanding()');
                 dropdownMenu.attr('collapsed', 'doCollapsed()');
-                dropdownMenu.find('li > a').attr('ng-click', 'collapse()');
 
                 var compileElement = $compile(element.children());
 
                 compileElement(scope);
-            }
-        };
-    }
-
-    /** @ngInject */
-    function simpleMenuItem($compile, $log)
-    {
-        return {
-            link: function (scope, element, attrs) {
-                element.on('click', function () {
-                    scope.collapseCycle = ! scope.collapseCycle;
-                });
             }
         };
     }

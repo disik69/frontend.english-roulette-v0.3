@@ -8,6 +8,10 @@ body {
     padding-bottom: 61px;
 }
 
+body[role='button'] {
+    cursor: default;
+}
+
 footer {
     text-align: center;
     padding: 20px 0;
