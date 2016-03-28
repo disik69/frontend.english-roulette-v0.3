@@ -5,7 +5,7 @@ html {
 body {
     min-height: 100%;
     position: relative;
-    padding-bottom: 61px;
+    padding-bottom: 81px;
 }
 
 body[role='button'] {
@@ -20,6 +20,10 @@ footer {
     bottom: 0;
     width: 100%;
     border-top: 1px solid #aaa;
+}
+
+footer > p {
+    margin: 0;
 }
 
 .base-preloader {
