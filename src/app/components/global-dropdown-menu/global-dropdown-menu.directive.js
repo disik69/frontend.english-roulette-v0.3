@@ -3,10 +3,10 @@
 
     angular
         .module('frontendEnglishRouletteV03')
-        .directive('dropdownMenuItem', dropdownMenuItem);
+        .directive('globalDropdownMenu', globalDropdownMenu);
 
     /** @ngInject */
-    function dropdownMenuItem($compile, $log, $rootScope)
+    function globalDropdownMenu($compile, $log, $rootScope)
     {
         return {
             scope: {},
@@ -20,7 +20,7 @@
                     scope.collapsed = ! scope.collapsed;
                 };
 
-                $rootScope.$on(attrs.dropdownMenuItem, function () {
+                $rootScope.$on(attrs.globalDropdownMenu, function () {
                     if (enabledCollapseCycle) {
                         scope.collapsed = true;
                     } else {
@@ -44,9 +44,7 @@
                 dropdownMenu.attr('expanding', 'doExpanding()');
                 dropdownMenu.attr('collapsed', 'doCollapsed()');
 
-                var compileElement = $compile(element.children());
-
-                compileElement(scope);
+                $compile(element.children())(scope);
             }
         };
     }

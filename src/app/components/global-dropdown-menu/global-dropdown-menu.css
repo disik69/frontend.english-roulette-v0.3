@@ -1,0 +1,11 @@
+.collapsing, .in {
+    display: block;
+}
+
+.collapsing.in-remove {
+    z-index: 1;
+}
+
+.dropdown-menu.dropdown-menu-resp {
+    min-width: initial;
+}

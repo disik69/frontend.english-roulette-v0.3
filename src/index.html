@@ -54,7 +54,7 @@
                         <li ui-sref-active="active" ng-show="isGuest()"><a ui-sref="signin">Signin</a></li>
                         <li ui-sref-active="active" ng-show="isGuest()"><a ui-sref="signup">Signup</a></li>
                         <li ui-sref-active="active" ng-show="isUser()"><a ui-sref="dictionary">Dictionary</a></li>
-                        <li class="dropdown" dropdown-menu-item="collapseCycle" ng-show="isUser()">
+                        <li class="dropdown" global-dropdown-menu="collapseCycle" ng-show="isUser()">
                             <a class="dropdown-toggle" role="button">Lesson<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li ui-sref-active="active"><a ui-sref="foreign-native">Foreign -> Native</a></li>
@@ -64,7 +64,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" ng-show="isUser() || isAdmin()">
-                        <li class="dropdown" dropdown-menu-item="collapseCycle">
+                        <li class="dropdown" global-dropdown-menu="collapseCycle">
                             <a class="dropdown-toggle" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{passport.name}}</a>
                             <ul class="dropdown-menu">
                                 <li ng-show="isUser()"><a>for user...</a></li>
