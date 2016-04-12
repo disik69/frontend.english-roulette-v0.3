@@ -31,6 +31,7 @@
                 }
             } else {
                 currentCondition = true;
+                currentPreloader = null;
             }
         };
 

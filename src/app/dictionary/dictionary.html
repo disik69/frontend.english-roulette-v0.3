@@ -1,1 +1,78 @@
-dictionary
+<div class="row dictionary-word">
+    <div class="col-xs-1">
+        <div ng-if="groupActionMenuShowed" class="dropdown" global-dropdown-menu="collapseCycle">
+          <button class="btn btn-default dropdown-toggle">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-resp">
+            <li><a role="button" ng-click="changeExerciseStatusChain(null, {new: 1})"><span class="glyphicon glyphicon-repeat"></span></a></li>
+            <li><a role="button" ng-click="changeExerciseStatusChain(null, {old: 1})"><span class="glyphicon glyphicon-ok"></span></a></li>
+            <li><a role="button" ng-click="removeExerciseChain()"><span class="glyphicon glyphicon-trash"></span></a></li>
+          </ul>
+        </div>
+    </div>
+    <div class="col-xs-offset-3 col-xs-4">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="word" ng-model="word">
+            <div class="input-group-btn">
+                <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row dictionary-head">
+    <div class="col-xs-1">
+        <input type="checkbox" ng-model="allExercisesSelected">
+    </div>
+    <div class="col-xs-4">
+        <strong>Word</strong>
+    </div>
+    <div class="col-xs-4">
+        <strong>Translation</strong>
+    </div>
+    <div class="col-xs-1">
+        <strong>Reading</strong>
+    </div>
+    <div class="col-xs-1">
+        <strong>Memory</strong>
+    </div>
+    <div class="col-xs-1">
+        <strong>Status</strong>
+    </div>
+</div>
+<div class="row dictionary-exercise" ng-repeat="exercise in exercises" ng-init="selectedExercises[$index] = false">
+    <div class="col-xs-1">
+        <input type="checkbox" ng-model="selectedExercises[$index]">
+    </div>
+    <div class="col-xs-4">
+        {{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span>
+    </div>
+    <div class="col-xs-4">
+        <span ng-repeat="translation in exercise.translations">{{translation.body}}<span ng-if="! $last">, </span></span>
+    </div>
+    <div class="col-xs-1">
+        <span ng-if="exercise.status == 'new'">{{exercise.reading}}</span><span ng-if="exercise.status == 'old'">-</span>
+    </div>
+    <div class="col-xs-1">
+        <span ng-if="exercise.status == 'new'">{{exercise.memory}}</span><span ng-if="exercise.status == 'old'">-</span>
+    </div>
+    <div class="col-xs-1">
+        <div class="dropdown" global-dropdown-menu="collapseCycle">
+          <button class="btn btn-default dropdown-toggle">
+            <span ng-if="exercise.status == 'old'" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="exercise.status == 'new'" class="glyphicon glyphicon-repeat"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-resp">
+            <li ng-if="exercise.status == 'new'"><a role="button" ng-click="changeExerciseStatus($index, {old: 1})"><span class="glyphicon glyphicon-ok"></span></a></li>
+            <li ng-if="exercise.status == 'old'"><a role="button" ng-click="changeExerciseStatus($index, {new: 1})"><span class="glyphicon glyphicon-repeat"></span></a></li>
+            <li><a role="button" ng-click="removeExercise($index)"><span class="glyphicon glyphicon-trash"></span></a></li>
+          </ul>
+        </div>
+    </div>
+</div>
+<div ng-show="exerciseListEmpty" class="row dictionary-empty">
+    There aren't exercises.
+</div>
+<div class="row dictionary-preloader">
+    <img class="center-block" src="assets/images/small-preloader.gif" alt="preloader">
+</div>
