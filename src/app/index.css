@@ -47,3 +47,7 @@ footer > p {
     color: #000;
     padding: 0.2em 0;
 }
+
+.custom-modal-backdrop {
+    opacity: .3 !important;
+}

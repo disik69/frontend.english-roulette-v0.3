@@ -5,13 +5,16 @@
         .service('preloader', Preloader);
 
     /** @ngInject */
-    function Preloader()
+    function Preloader($log)
     {
+        var callCounter = 0;
         var basePreloader = angular.element('.base-preloader');
         var currentPreloader = null;
         var currentCondition = true;
 
         this.show = function () {
+            callCounter++;
+
             if (currentCondition) {
                 if (currentPreloader) {
                     currentPreloader.show();
@@ -22,25 +25,44 @@
         };
 
         this.hide = function () {
-            if (currentCondition) {
+            callCounter--;
+
+            if (! callCounter) {
                 if (currentPreloader) {
                     currentPreloader.hide();
                     currentPreloader = null;
                 } else {
                     basePreloader.hide();
                 }
-            } else {
+
                 currentCondition = true;
-                currentPreloader = null;
             }
         };
 
         this.set = function (preloadedElement) {
-            currentPreloader = preloadedElement;
+            if (callCounter) {
+                if (currentPreloader) {
+                    currentPreloader.hide();
+                } else {
+                    basePreloader.hide();
+                }
+
+                currentPreloader = preloadedElement.show();
+            } else {
+                currentPreloader = preloadedElement;
+            }
         };
 
         this.off = function () {
-            currentCondition = false;
+            if (callCounter)
+                if (currentPreloader) {
+                    currentPreloader.hide()
+                } else {
+                    basePreloader.hide();
+                }
+            else {
+                currentCondition = false;
+            }
         };
     }
 })();

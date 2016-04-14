@@ -6,30 +6,34 @@
         .controller('DictionaryController', DictionaryController);
 
     /** @ngInject */
-    function DictionaryController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $timeout)
+    function DictionaryController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $uibModal, $timeout)
     {
-        var exercises = Restangular.all('exercise');
-        var dictionaryPreloader = angular.element('.dictionary-preloader');
+        var exercise = Restangular.all('exercise');
+        var dictionaryPaginationPreloader = angular.element('.dictionary-pagination-preloader');
+        var dictionaryWordQueryPreloader = angular.element('.dictionary-word-query-preloader');
         var page = 1;
         var lastPage = 1;
-        var limit = 6;
+        var limit = 30;
 
-        var wordWatcher = function (newValue) {
-            preloader.set(dictionaryPreloader);
+        var reloadExerciseList = function (preloaderElement) {
+            preloader.set(preloaderElement);
             page = 1;
-            $scope.exercises = [];
-            $scope.selectedExercises = [];
             $scope.exerciseListEmpty = false;
-            $scope.allExercisesSelected = false;
 
-            exercises.getList({search: newValue}, {'Page': page, 'Limit': limit}).then(
+            exercise.getList({search: $scope.wordQuery}, {'Page': page, 'Limit': limit}).then(
                 function (response) {
                     $scope.exercises = response.data;
                     lastPage = response.headers('Last-Page');
+                    $scope.exerciseListEmpty = false;
                 },
                 function () {
                     $scope.exercises = [];
                     $scope.exerciseListEmpty = true;
+                }
+            ).finally(
+                function () {
+                    $scope.selectedExercises = [];
+                    $scope.allExercisesSelected = false;
                 }
             );
         };
@@ -40,9 +44,20 @@
             }, false);
         };
 
-        var allExerciseSelectedWatcher = function (newValue) {
+        var allExercisesSelectedWatcher = function (newValue) {
             for (var i = 0, size = $scope.selectedExercises.length; i < size; i++) {
                 $scope.selectedExercises[i] = newValue;
+            }
+        };
+
+        var wordQueryWatcher = {
+            enabled: false,
+            callback: function () {
+                if (wordQueryWatcher.enabled) {
+                    reloadExerciseList(dictionaryWordQueryPreloader);
+                } else {
+                    wordQueryWatcher.enabled = true;
+                }
             }
         };
 
@@ -50,9 +65,9 @@
             if (page + 1 <= lastPage) {
                 loadExercisePage.lock = true;
                 page++;
-                preloader.set(dictionaryPreloader);
+                preloader.set(dictionaryPaginationPreloader);
 
-                exercises.getList({search: $scope.word}, {'Page': page, 'Limit': limit}).then(
+                exercise.getList({search: $scope.wordQuery}, {'Page': page, 'Limit': limit}).then(
                     function (response) {
                         $scope.exercises = $scope.exercises.concat(response.data);
                     }
@@ -64,6 +79,17 @@
 
         $rootScope.$on('endDocumentScroll', function () {
             loadExercisePage.execute();
+        });
+
+        $rootScope.$on('documentScroll', function (event, scroll) {
+            var $ = angular.element;
+            var $dictionaryWordQuery = $('.dictionary-word-query');
+
+            if (scroll >= $('nav').innerHeight()) {
+                $dictionaryWordQuery.addClass('dictionary-word-query-fixed');
+            } else {
+                $dictionaryWordQuery.removeClass('dictionary-word-query-fixed');
+            }
         });
 
         $scope.removeExercise = function (index) {
@@ -154,16 +180,26 @@
             }
         };
 
-        $rootScope.$on('documentScroll', function (event, scroll) {
-            var $ = angular.element;
-            var $dictionaryWord = $('.dictionary-word');
+        $scope.createExercise = function () {
+            if ($scope.wordQuery) {
+                $uibModal.open({
+                    size: 'lg',
+                    scope: $scope,
+                    animation: false,
+                    templateUrl: 'app/dictionary/dictionary.word.html',
+                    controller: 'DictionaryWordController',
+                    backdropClass: 'custom-modal-backdrop'
+                }).result.finally(
+                    function () {
+                        wordQueryWatcher.enabled = false;
+                        $scope.wordQuery = '';
+                        $scope.exercises = [];
+                        reloadExerciseList(dictionaryPaginationPreloader);
 
-            if (scroll >= $('nav').innerHeight()) {
-                $dictionaryWord.addClass('dictionary-word-fixed');
-            } else {
-                $dictionaryWord.removeClass('dictionary-word-fixed');
+                    }
+                );
             }
-        });
+        };
 
         $scope.exercises = [];
         $scope.selectedExercises = [];
@@ -171,8 +207,10 @@
         $scope.allExercisesSelected = false;
         $scope.groupActionMenuShowed = false;
 
-        $scope.$watch('word', wordWatcher);
-        $scope.$watch('allExercisesSelected', allExerciseSelectedWatcher);
+        reloadExerciseList(dictionaryPaginationPreloader);
+
+        $scope.$watch('wordQuery', wordQueryWatcher.callback);
+        $scope.$watch('allExercisesSelected', allExercisesSelectedWatcher);
         $scope.$watchCollection('selectedExercises', selectedExercisesWatcher);
     }
 })();
