@@ -8,8 +8,16 @@
     /** @ngInject */
     function DictionaryWordController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $uibModalInstance)
     {
-        preloader.off();
+        $scope.words = [];
 
-        $scope.words = Restangular.all('word').getList({body: $scope.wordQuery}).$object;
+        Restangular.all('word').getList({body: $scope.wordQuery}).then(
+            function (response) {
+                $scope.words = response.data;
+            }
+        ).finally(
+            function () {
+                preloader.hideForcibly();
+            }
+        );
     }
 })();

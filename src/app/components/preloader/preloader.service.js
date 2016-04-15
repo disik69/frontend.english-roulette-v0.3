@@ -39,6 +39,14 @@
             }
         };
 
+        this.hideForcibly = function () {
+            if (currentPreloader) {
+                currentPreloader.hide()
+            } else {
+                basePreloader.hide();
+            }
+        };
+
         this.set = function (preloadedElement) {
             if (callCounter) {
                 if (currentPreloader) {
@@ -55,11 +63,7 @@
 
         this.off = function () {
             if (callCounter)
-                if (currentPreloader) {
-                    currentPreloader.hide()
-                } else {
-                    basePreloader.hide();
-                }
+                this.hideForcibly();
             else {
                 currentCondition = false;
             }

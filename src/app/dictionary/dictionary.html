@@ -13,7 +13,7 @@
     </div>
     <div class="col-xs-offset-3 col-xs-4">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="word" ng-model="wordQuery" onkeyenter="createExercise()">
+            <input class="form-control" type="text" placeholder="word" ng-model="wordQuery" ng-keyup="keyupWordQueryField($event)">
             <img src="assets/images/16-preloader.gif" class="dictionary-word-query-preloader" alt="preloader">
             <div class="input-group-btn">
                 <button class="btn btn-default" ng-click="createExercise()">

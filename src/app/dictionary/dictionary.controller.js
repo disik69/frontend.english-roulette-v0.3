@@ -15,7 +15,7 @@
         var lastPage = 1;
         var limit = 30;
 
-        var reloadExerciseList = function (preloaderElement) {
+        var loadFirstExercisePage = function (preloaderElement) {
             preloader.set(preloaderElement);
             page = 1;
             $scope.exerciseListEmpty = false;
@@ -54,16 +54,16 @@
             enabled: false,
             callback: function () {
                 if (wordQueryWatcher.enabled) {
-                    reloadExerciseList(dictionaryWordQueryPreloader);
+                    loadFirstExercisePage(dictionaryWordQueryPreloader);
                 } else {
                     wordQueryWatcher.enabled = true;
                 }
             }
         };
 
-        var loadExercisePage = lockedCallback(function () {
+        var loadNextExercisePage = lockedCallback(function () {
             if (page + 1 <= lastPage) {
-                loadExercisePage.lock = true;
+                loadNextExercisePage.lock = true;
                 page++;
                 preloader.set(dictionaryPaginationPreloader);
 
@@ -72,13 +72,41 @@
                         $scope.exercises = $scope.exercises.concat(response.data);
                     }
                 ).finally(function () {
-                    loadExercisePage.lock = false;
+                    loadNextExercisePage.lock = false;
                 });
             }
         });
 
+        var createExercise = function () {
+            if ($scope.wordQuery) {
+                var wordModal = $uibModal.open({
+                    size: 'lg',
+                    scope: $scope,
+                    animation: false,
+                    templateUrl: 'app/dictionary/dictionary.word.html',
+                    controller: 'DictionaryWordController',
+                    backdropClass: 'custom-modal-backdrop'
+                });
+
+                wordModal.rendered.finally(
+                    function () {
+                        preloader.set(angular.element('.dictionary-word-preloader'));
+                    }
+                );
+
+                wordModal.result.finally(reloadFirstExercisePage);
+            }
+        };
+
+        var reloadFirstExercisePage = function () {
+            wordQueryWatcher.enabled = false;
+            $scope.wordQuery = '';
+            $scope.exercises = [];
+            loadFirstExercisePage(dictionaryPaginationPreloader);
+        };
+
         $rootScope.$on('endDocumentScroll', function () {
-            loadExercisePage.execute();
+            loadNextExercisePage.execute();
         });
 
         $rootScope.$on('documentScroll', function (event, scroll) {
@@ -180,24 +208,14 @@
             }
         };
 
-        $scope.createExercise = function () {
-            if ($scope.wordQuery) {
-                $uibModal.open({
-                    size: 'lg',
-                    scope: $scope,
-                    animation: false,
-                    templateUrl: 'app/dictionary/dictionary.word.html',
-                    controller: 'DictionaryWordController',
-                    backdropClass: 'custom-modal-backdrop'
-                }).result.finally(
-                    function () {
-                        wordQueryWatcher.enabled = false;
-                        $scope.wordQuery = '';
-                        $scope.exercises = [];
-                        reloadExerciseList(dictionaryPaginationPreloader);
+        $scope.keyupWordQueryField = function (event) {
+            switch (event.keyCode) {
+                case 13:
+                    createExercise();
+                    break;
 
-                    }
-                );
+                case 27:
+                    reloadFirstExercisePage();
             }
         };
 
@@ -207,7 +225,7 @@
         $scope.allExercisesSelected = false;
         $scope.groupActionMenuShowed = false;
 
-        reloadExerciseList(dictionaryPaginationPreloader);
+        loadFirstExercisePage(dictionaryPaginationPreloader);
 
         $scope.$watch('wordQuery', wordQueryWatcher.callback);
         $scope.$watch('allExercisesSelected', allExercisesSelectedWatcher);
