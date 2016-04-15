@@ -90,7 +90,9 @@
 
                 wordModal.rendered.finally(
                     function () {
-                        preloader.set(angular.element('.dictionary-word-preloader'));
+                        $scope.dictionaryWordPreloader = angular.element('.dictionary-word-preloader');
+
+                        preloader.set($scope.dictionaryWordPreloader);
                     }
                 );
 

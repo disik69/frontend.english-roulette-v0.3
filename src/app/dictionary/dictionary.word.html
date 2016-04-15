@@ -1,76 +1,36 @@
 <div class="container-fluid dictionary-word-modal">
     <div class="dictionary-word-divider" ng-repeat="word in words">
-        <div class="row dictionary-word">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-1"><input type="checkbox"></div>
-                    <div class="col-xs-11">{{word.body}} <span ng-if="word.position">[{{word.ts}}] <em>{{word.position}}</em></span></div>
+        <div class="row dictionary-word" ng-class="{'text-muted': word.used}">
+            <div class="col-xs-6 dictionary-word-body">
+                <div class="checkbox">
+                    <label><input type="checkbox" ng-disabled="word.used">{{word.body}} <span ng-if="word.position">[{{word.ts}}] <em>{{word.position}}</em></span></label>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="row dictionary-translation" ng-repeat="translation in word.translations">
-                    <div class="col-xs-1"><input type="checkbox"></div>
-                    <div class="col-xs-11">{{translation.body}}</div>
+                    <div class="col-xs-12 checkbox"><label><input type="checkbox" ng-disabled="word.used">{{translation.body}}</label></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="dictionary-word-divider">
         <div class="row dictionary-word">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-1"><input type="checkbox"></div>
-                    <div class="col-xs-11">{{wordQuery}}</div>
+            <div class="col-xs-6 dictionary-word-body">
+                <div class="checkbox">
+                    <label><input type="checkbox">{{wordQuery}}</label>
                 </div>
             </div>
             <div class="col-xs-6">
-                <!--<div class="row dictionary-translation">-->
-                    <!--<div class="col-xs-12">-->
-                        <!--<div class="input-group">-->
-                            <!--<span class="input-group-addon">-->
-                                <!--<input type="checkbox">-->
-                            <!--</span>-->
-                            <!--<input type="text" class="form-control">-->
-                            <!--<div class="input-group-btn">-->
-                                <!--<button class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="row dictionary-translation">-->
-                    <!--<div class="col-xs-12">-->
-                        <!--<div class="input-group">-->
-                            <!--<span class="input-group-addon">-->
-                                <!--<input type="checkbox">-->
-                            <!--</span>-->
-                            <!--<input type="text" class="form-control">-->
-                            <!--<div class="input-group-btn">-->
-                                <!--<button class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="row dictionary-translation">-->
-                    <!--<div class="col-xs-12">-->
-                        <!--<div class="input-group">-->
-                            <!--<span class="input-group-addon">-->
-                                <!--<input type="checkbox">-->
-                            <!--</span>-->
-                            <!--<input type="text" class="form-control">-->
-                            <!--<div class="input-group-btn">-->
-                                <!--<button class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="row dictionary-translation" ng-repeat="customTranslation in customTranslations">
+                    <div class="col-xs-12">
+                        <div class="dictionary-custom-translation">{{customTranslation}}</div>
+                        <button class="btn btn-default dictionary-custom-translation-btn" ng-click="removeCustomTranslation($index)"><span class="glyphicon glyphicon-minus"></span></button>
+                    </div>
+                </div>
                 <div class="row dictionary-translation">
                     <div class="col-xs-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-                            </div>
-                        </div>
+                        <input type="text" class="form-control dictionary-custom-translation-field" ng-model="customTranslationRaw" ng-keyup="keyupAddCustomTranslation($event)">
+                        <button class="btn btn-default dictionary-custom-translation-btn" ng-click="addCustomTranslation()"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                 </div>
             </div>
@@ -82,7 +42,7 @@
                 <img class="center-block" src="assets/images/32-preloader.gif" alt="preloader">
             </div>
         </div>
-        <div class="col-xs-3"><button class="btn btn-primary form-control"><span class="glyphicon glyphicon-ok"></span></button></div>
-        <div class="col-xs-3"><button class="btn btn-warning form-control"><span class="glyphicon glyphicon-remove"></span></button></div>
+        <div class="col-xs-3"><button class="btn btn-primary form-control" ng-click="createExercise()"><span class="glyphicon glyphicon-ok"></span></button></div>
+        <div class="col-xs-3"><button class="btn btn-warning form-control" ng-click="closeModal()"><span class="glyphicon glyphicon-remove"></span></button></div>
     </div>
 </div>
