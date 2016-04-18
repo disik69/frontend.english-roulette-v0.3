@@ -23,16 +23,22 @@
             exercise.getList({search: $scope.wordQuery}, {'Page': page, 'Limit': limit}).then(
                 function (response) {
                     $scope.exercises = response.data;
+
+                    $scope.selectedExercises = [];
+                    response.data.forEach(function (item, index, array) {
+                       $scope.selectedExercises[index] = false;
+                    });
+
                     lastPage = response.headers('Last-Page');
                     $scope.exerciseListEmpty = false;
                 },
                 function () {
                     $scope.exercises = [];
+                    $scope.selectedExercises = [];
                     $scope.exerciseListEmpty = true;
                 }
             ).finally(
                 function () {
-                    $scope.selectedExercises = [];
                     $scope.allExercisesSelected = false;
                 }
             );

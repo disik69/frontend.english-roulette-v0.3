@@ -40,7 +40,7 @@
         <strong>Status</strong>
     </div>
 </div>
-<div class="row dictionary-exercise" ng-repeat="exercise in exercises track by exercise.id" ng-init="selectedExercises[$index] = false">
+<div class="row dictionary-exercise" ng-repeat="exercise in exercises track by exercise.id">
     <div class="col-xs-offset-1 col-xs-4 checkbox">
         <label><input type="checkbox" ng-model="selectedExercises[$index]">{{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span></label>
     </div>
