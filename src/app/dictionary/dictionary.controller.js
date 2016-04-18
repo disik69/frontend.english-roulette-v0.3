@@ -25,7 +25,7 @@
                     $scope.exercises = response.data;
 
                     $scope.selectedExercises = [];
-                    response.data.forEach(function (item, index, array) {
+                    response.data.forEach(function (item, index) {
                        $scope.selectedExercises[index] = false;
                     });
 
