@@ -12,6 +12,7 @@
             'ngStorage',
             'restangular',
             'ui.router',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'angucomplete-alt'
         ]);
 })();

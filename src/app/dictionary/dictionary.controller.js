@@ -6,7 +6,7 @@
         .controller('DictionaryController', DictionaryController);
 
     /** @ngInject */
-    function DictionaryController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $uibModal, fillArray)
+    function DictionaryController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $timeout, $uibModal, fillArray)
     {
         var exercise = Restangular.all('exercise');
         var dictionaryPaginationPreloader = angular.element('.dictionary-pagination-preloader');
@@ -55,13 +55,18 @@
 
         var wordQueryWatcher = {
             enabled: false,
-            callback: function () {
+            callback: lockedCallback(function () {
                 if (wordQueryWatcher.enabled) {
-                    loadFirstExercisePage(dictionaryWordQueryPreloader);
+                    wordQueryWatcher.callback.lock = true;
+
+                    $timeout(function () {
+                        loadFirstExercisePage(dictionaryWordQueryPreloader);
+                        wordQueryWatcher.callback.lock = false;
+                    }, 500);
                 } else {
                     wordQueryWatcher.enabled = true;
                 }
-            }
+            })
         };
 
         var loadNextExercisePage = lockedCallback(function () {
@@ -254,7 +259,9 @@
                     break;
 
                 case 27:
-                    reloadFirstExercisePage();
+                    if ($scope.wordQuery) {
+                        reloadFirstExercisePage();
+                    }
             }
         };
 
@@ -266,7 +273,7 @@
 
         loadFirstExercisePage(dictionaryPaginationPreloader);
 
-        $scope.$watch('wordQuery', wordQueryWatcher.callback);
+        $scope.$watch('wordQuery', wordQueryWatcher.callback.execute);
         $scope.$watch('allExercisesSelected', allExercisesSelectedWatcher);
         $scope.$watchCollection('selectedExercises', selectedExercisesWatcher);
     }
