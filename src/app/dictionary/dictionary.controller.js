@@ -6,7 +6,7 @@
         .controller('DictionaryController', DictionaryController);
 
     /** @ngInject */
-    function DictionaryController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $uibModal, $timeout)
+    function DictionaryController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $uibModal, fillArray)
     {
         var exercise = Restangular.all('exercise');
         var dictionaryPaginationPreloader = angular.element('.dictionary-pagination-preloader');
@@ -24,10 +24,7 @@
                 function (response) {
                     $scope.exercises = response.data;
 
-                    $scope.selectedExercises = [];
-                    response.data.forEach(function (item, index) {
-                       $scope.selectedExercises[index] = false;
-                    });
+                    $scope.selectedExercises = fillArray(response.data.length, false);
 
                     lastPage = response.headers('Last-Page');
                     $scope.exerciseListEmpty = false;
@@ -76,6 +73,8 @@
                 exercise.getList({search: $scope.wordQuery}, {'Page': page, 'Limit': limit}).then(
                     function (response) {
                         $scope.exercises = $scope.exercises.concat(response.data);
+
+                        $scope.selectedExercises = $scope.selectedExercises.concat(fillArray(response.data.length, false));
                     }
                 ).finally(function () {
                     loadNextExercisePage.lock = false;
