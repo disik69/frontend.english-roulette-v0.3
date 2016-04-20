@@ -40,7 +40,7 @@
     margin-bottom: 15px;
 }
 
-.dictionary-pagination-preloader, .dictionary-word-preloader {
+.dictionary-pagination-preloader, .dictionary-word-preloader, .dictionary-translation-preloader {
     display: none;
 }
 
@@ -57,6 +57,10 @@
 .dictionary-word {
     padding-top: 7px;
     padding-bottom: 7px;
+}
+
+.dictionary-word :focus {
+    outline: none;
 }
 
 .dictionary-exercise .checkbox, .dictionary-head .checkbox, .dictionary-word .checkbox {
@@ -111,6 +115,18 @@
     padding: 1px 5px;
     margin-left: 5px;
     width: 30px;
+}
+
+.dictionary-translation-list {
+    border-radius: 4px;
+}
+
+.dictionary-translation-list:hover {
+    background-color: #ccc;
+}
+
+.dictionary-translation-list:focus {
+    outline: none;
 }
 
 

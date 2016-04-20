@@ -11,6 +11,7 @@
         var word = Restangular.all('word');
         var translation = Restangular.all('translation');
         var exercise = Restangular.all('exercise');
+        var wordQuery = $scope.wordQuery;
 
         var unwatchSelectedWords = function () {};
         var selectedWordsWatcher = function (newValue, oldValue) {
@@ -76,7 +77,7 @@
                 function (data) {
                    preloader.set($scope.dictionaryWordPreloader);
 
-                   return word.post({body: $scope.wordQuery, translation_id: data[0]}).then(
+                   return word.post({body: wordQuery, translation_id: data[0]}).then(
                        function (response) {
                            var wordId = response.data.id;
                            var translationAddingPromises = [];
@@ -164,7 +165,7 @@
         var reloadWords = function () {
             preloader.set($scope.dictionaryWordPreloader);
 
-            return word.getList({body: $scope.wordQuery}).then(
+            return word.getList({body: wordQuery}).then(
                 function (response) {
                     response.data.forEach(function (item, index) {
                         var selectedWord = {selected: false, selectedTranslations: []};
@@ -257,7 +258,7 @@
             return customTranslationsNotEmpty || selectedTranslationsNotEmpty;
         };
 
-        word.post({body: $scope.wordQuery, via_dictionary: 1}).finally(
+        word.post({body: wordQuery, via_dictionary: true}).finally(
             function () {
                 reloadWords();
             }

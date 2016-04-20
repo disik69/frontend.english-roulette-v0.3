@@ -10,13 +10,14 @@
     {
         function LockedCallback(callback)
         {
+            var instance = this;
             var callback = callback;
 
-            this.lock = false;
+            instance.lock = false;
 
-            this.execute = function () {
-                if (! this.lock) {
-                    callback();
+            instance.execute = function () {
+                if (! instance.lock) {
+                    callback.apply(this, arguments);
                 }
             };
         }

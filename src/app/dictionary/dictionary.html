@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="row dictionary-head">
-    <div class="col-xs-offset-1 col-xs-4 checkbox">
+    <div class="col-xs-offset-1 col-xs-3 checkbox">
         <label><input type="checkbox" ng-model="allExercisesSelected"><strong>Word</strong></label>
     </div>
     <div class="col-xs-4">
@@ -37,21 +37,27 @@
         <strong>Memory</strong>
     </div>
     <div class="col-xs-1">
+        <strong>Check at</strong>
+    </div>
+    <div class="col-xs-1">
         <strong>Status</strong>
     </div>
 </div>
 <div class="row dictionary-exercise" ng-repeat="exercise in exercises track by exercise.id">
-    <div class="col-xs-offset-1 col-xs-4 checkbox">
+    <div class="col-xs-offset-1 col-xs-3 checkbox">
         <label><input type="checkbox" ng-model="selectedExercises[$index]">{{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span></label>
     </div>
-    <div class="col-xs-4">
-        <span ng-repeat="translation in exercise.translations track by translation.id">{{translation.body}}<span ng-if="! $last">, </span></span>
+    <div class="col-xs-4 dictionary-translation-list" ng-click="changeTranslation($index)">
+        <span ng-repeat="translation in exercise.translations | filter:{used: true}  track by translation.id">{{translation.body}}<span ng-if="! $last">, </span></span>
     </div>
     <div class="col-xs-1">
         <span ng-if="exercise.status == 'new'">{{exercise.reading}}</span><span ng-if="exercise.status == 'old'">-</span>
     </div>
     <div class="col-xs-1">
         <span ng-if="exercise.status == 'new'">{{exercise.memory}}</span><span ng-if="exercise.status == 'old'">-</span>
+    </div>
+    <div class="col-xs-1">
+        {{exercise.check_at | strToDate:'d MMMM':'-'}}
     </div>
     <div class="col-xs-1">
         <div class="dropdown" global-dropdown-menu="collapseCycle">

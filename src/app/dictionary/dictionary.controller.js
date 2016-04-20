@@ -83,27 +83,14 @@
             }
         });
 
-        var createExercise = function () {
-            if ($scope.wordQuery) {
-                var wordModal = $uibModal.open({
-                    size: 'lg',
-                    scope: $scope,
-                    animation: false,
-                    templateUrl: 'app/dictionary/dictionary.word.html',
-                    controller: 'DictionaryWordController',
-                    backdropClass: 'custom-modal-backdrop'
-                });
+        var reloadExercise = function (index) {
+            preloader.off();
 
-                wordModal.rendered.finally(
-                    function () {
-                        $scope.dictionaryWordPreloader = angular.element('.dictionary-word-preloader');
-
-                        preloader.set($scope.dictionaryWordPreloader);
-                    }
-                );
-
-                wordModal.result.finally(reloadFirstExercisePage);
-            }
+            $scope.exercises[index].get().then(
+                function (response) {
+                    $scope.exercises[index] = response.data;
+                }
+            );
         };
 
         var reloadFirstExercisePage = function () {
@@ -128,6 +115,56 @@
             }
         });
 
+        $scope.changeTranslation = function (index) {
+            $scope.currentExercise = $scope.exercises[index];
+
+            var translationModal = $uibModal.open({
+                size: 'sm',
+                scope: $scope,
+                animation: false,
+                templateUrl: 'app/dictionary/dictionary.translation.html',
+                controller: 'DictionaryTranslationController',
+                backdropClass: 'custom-modal-backdrop'
+            });
+
+            translationModal.rendered.finally(
+                function () {
+                    $scope.dictionaryTranslationPreloader = angular.element('.dictionary-translation-preloader');
+
+                    preloader.set($scope.dictionaryTranslationPreloader);
+                }
+            );
+
+            translationModal.closed.finally(
+                function () {
+                    delete $scope.currentExercise;
+                }
+            );
+        };
+
+        $scope.createExercise = function () {
+            if ($scope.wordQuery) {
+                var wordModal = $uibModal.open({
+                    size: 'lg',
+                    scope: $scope,
+                    animation: false,
+                    templateUrl: 'app/dictionary/dictionary.word.html',
+                    controller: 'DictionaryWordController',
+                    backdropClass: 'custom-modal-backdrop'
+                });
+
+                wordModal.rendered.finally(
+                    function () {
+                        $scope.dictionaryWordPreloader = angular.element('.dictionary-word-preloader');
+
+                        preloader.set($scope.dictionaryWordPreloader);
+                    }
+                );
+
+                wordModal.result.finally(reloadFirstExercisePage);
+            }
+        };
+
         $scope.removeExercise = function (index) {
             preloader.off();
 
@@ -150,12 +187,7 @@
                 function (response) {
                     $scope.selectedExercises[index] = false;
 
-                    preloader.off();
-                    $scope.exercises[index].get().then(
-                        function (response) {
-                            $scope.exercises[index] = response.data;
-                        }
-                    );
+                    reloadExercise(index)
                 }
             );
         };
@@ -219,7 +251,7 @@
         $scope.keyupWordQueryField = function (event) {
             switch (event.keyCode) {
                 case 13:
-                    createExercise();
+                    $scope.createExercise();
                     break;
 
                 case 27:
