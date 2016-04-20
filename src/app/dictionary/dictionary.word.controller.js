@@ -73,7 +73,7 @@
         };
 
         var createWord = function () {
-            return (createTranslations()).then(
+            return createTranslations().then(
                 function (data) {
                    preloader.set($scope.dictionaryWordPreloader);
 
@@ -105,7 +105,7 @@
             var deferred = $q.defer();
 
             if ($scope.customWordEnabled) {
-                (createWord()).then(
+                createWord().then(
                     function (data) {
                         deferred.resolve(data);
                     },
@@ -218,7 +218,7 @@
         $scope.createExercise = lockedCallback(function () {
             $scope.createExercise.lock = true;
 
-            (createExercise()).then(
+            createExercise().then(
                 function () {
                     $uibModalInstance.close();
                 },
