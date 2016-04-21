@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-xs-2"><h3 class="text-center">{{count}}</h3></div>
+    <div class="col-xs-8"><h3 class="text-center">{{title}}<span ng-show="repetitionAmount">: <strong>{{repetitionAmount}}</strong></span></h3></div>
+</div>
+<div class="row">
+    <div class="col-xs-6 text-center" ng-class="{'lesson-word': leftSide.word, 'lesson-translation': leftSide.translation}" ng-bind-html="leftSide.body"></div>
+    <div class="col-xs-6 text-center" ng-class="{'text-success': rightSide.success, 'text-danger': rightSide.error, 'invisible': rightSide.invisible, 'lesson-word': rightSide.word, 'lesson-translation': rightSide.translation}" ng-bind-html="rightSide.body"></div>
+</div>
+<div class="row lesson-driver">
+    <div class="col-xs-offset-4 col-xs-4">
+        <angucomplete-alt
+                      id="lesson-angucomplete"
+                      minlength="1"
+                      placeholder="{{autocomplete.placeholder}}"
+                      pause="500"
+                      selected-object="autocomplete.result"
+                      remote-api-handler="autocomplete.promise"
+                      remote-url-error-callback="autocomplete.error"
+                      input-changed="autocomplete.inputChanged"
+                      text-searching="searching..."
+                      text-no-results="no results"
+                      title-field="body"
+                      disable-input="answerDisabled"
+                      input-class="form-control"/>
+    </div>
+    <div class="col-xs-1"><button class="btn btn-default form-control" ng-disabled="answerDisabled" ng-click="play.execute()"><span class="glyphicon glyphicon-play"></span></button></div>
+    <div class="col-xs-1"><button class="btn btn-default form-control" ng-disabled="nextDisabled" ng-click="pushNextExercise()"><span class="glyphicon glyphicon-step-forward"></span></button></div>
+    <div class="col-xs-1"><button class="btn btn-default form-control" ng-click="stop()"><span class="glyphicon glyphicon-stop"></span></button></div>
+</div>
+

@@ -1,0 +1,15 @@
+.lesson-word {
+    margin: 150px 0;
+}
+
+.lesson-translation {
+    margin: 150px 0 50px 0;
+}
+
+.lesson-driver {
+    margin-bottom: 50px;
+}
+
+#lesson-angucomplete_dropdown {
+    z-index: 1005;
+}
