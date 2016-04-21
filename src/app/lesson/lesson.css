@@ -10,6 +10,25 @@
     margin-bottom: 50px;
 }
 
+.left-side span, .right-side span {
+    background-color: #000;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    padding: 4px;
+    font-weight: 600;
+}
+
+.right-side .lesson-success {
+    background-color: #32af30;
+}
+
+.right-side .lesson-error {
+    background-color: #da3f3f;
+}
+
 #lesson-angucomplete_dropdown {
     z-index: 1005;
 }
+
+

@@ -3,8 +3,12 @@
     <div class="col-xs-8"><h3 class="text-center">{{title}}<span ng-show="repetitionAmount">: <strong>{{repetitionAmount}}</strong></span></h3></div>
 </div>
 <div class="row">
-    <div class="col-xs-6 text-center" ng-class="{'lesson-word': leftSide.word, 'lesson-translation': leftSide.translation}" ng-bind-html="leftSide.body"></div>
-    <div class="col-xs-6 text-center" ng-class="{'text-success': rightSide.success, 'text-danger': rightSide.error, 'invisible': rightSide.invisible, 'lesson-word': rightSide.word, 'lesson-translation': rightSide.translation}" ng-bind-html="rightSide.body"></div>
+    <div class="col-xs-6 text-center left-side" ng-class="{'lesson-word': leftSide.word, 'lesson-translation': leftSide.translation}">
+        <span ng-bind-html="leftSide.body"></span>
+    </div>
+    <div class="col-xs-6 text-center right-side" ng-class="{'invisible': rightSide.invisible, 'lesson-word': rightSide.word, 'lesson-translation': rightSide.translation}">
+        <span ng-bind-html="rightSide.body" ng-class="{'lesson-success': rightSide.success, 'lesson-error': rightSide.error}"></span>
+    </div>
 </div>
 <div class="row lesson-driver">
     <div class="col-xs-offset-4 col-xs-4">

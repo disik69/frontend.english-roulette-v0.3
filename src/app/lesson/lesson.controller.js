@@ -131,7 +131,10 @@
                     var result = false;
 
                     for (var i = 0, size = $scope.currentExercise.translations.length; i < size; i++) {
-                        if ($scope.currentExercise.translations[i].body === $scope.answer) {
+                        if (
+                            ($scope.currentExercise.translations[i].used) &&
+                            ($scope.currentExercise.translations[i].body === $scope.answer)
+                        ) {
                             result = true;
 
                             break;
