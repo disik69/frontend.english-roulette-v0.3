@@ -1,24 +1,26 @@
-<div class="row dictionary-word-query">
-    <div class="col-xs-1">
-        <div ng-if="groupActionMenuShowed" class="dropdown" global-dropdown-menu="collapseCycle">
-          <button class="btn btn-default dropdown-toggle">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-resp">
-            <li><a role="button" ng-click="changeExerciseStatusChain(null, {new: 1})"><span class="glyphicon glyphicon-repeat"></span></a></li>
-            <li><a role="button" ng-click="changeExerciseStatusChain(null, {old: 1})"><span class="glyphicon glyphicon-ok"></span></a></li>
-            <li><a role="button" ng-click="removeExerciseChain()"><span class="glyphicon glyphicon-trash"></span></a></li>
-          </ul>
+<div class="row dictionary-word-query-wrap">
+    <div class="dictionary-word-query">
+        <div class="col-xs-1">
+            <div ng-if="groupActionMenuShowed" class="dropdown" global-dropdown-menu="collapseCycle">
+              <button class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-resp">
+                <li><a role="button" ng-click="changeExerciseStatusChain(null, {new: 1})"><span class="glyphicon glyphicon-repeat"></span></a></li>
+                <li><a role="button" ng-click="changeExerciseStatusChain(null, {old: 1})"><span class="glyphicon glyphicon-ok"></span></a></li>
+                <li><a role="button" ng-click="removeExerciseChain()"><span class="glyphicon glyphicon-trash"></span></a></li>
+              </ul>
+            </div>
         </div>
-    </div>
-    <div class="col-xs-offset-3 col-xs-4">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="word" ng-model="wordQuery" ng-keyup="keyupWordQueryField($event)">
-            <img src="assets/images/16-preloader.gif" class="dictionary-word-query-preloader" alt="preloader">
-            <div class="input-group-btn">
-                <button class="btn btn-default" ng-click="createExercise()">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
+        <div class="col-xs-offset-3 col-xs-4">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="word" ng-model="wordQuery" ng-keyup="keyupWordQueryField($event)">
+                <img src="assets/images/16-preloader.gif" class="dictionary-word-query-preloader" alt="preloader">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" ng-click="createExercise()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

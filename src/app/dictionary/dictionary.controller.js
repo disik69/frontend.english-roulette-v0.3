@@ -113,9 +113,9 @@
             var $dictionaryWordQuery = $('.dictionary-word-query');
 
             if (scroll >= $('nav').innerHeight()) {
-                $dictionaryWordQuery.addClass('dictionary-word-query-fixed');
+                $dictionaryWordQuery.addClass('dictionary-word-query-fixed container');
             } else {
-                $dictionaryWordQuery.removeClass('dictionary-word-query-fixed');
+                $dictionaryWordQuery.removeClass('dictionary-word-query-fixed container');
             }
         });
 
@@ -264,6 +264,13 @@
                     }
             }
         };
+
+        // for firefox
+        angular.element('[ng-model="wordQuery"]').on('keydown', function (event) {
+            if ((event.keyCode === 27) && (! $scope.wordQuery)) {
+                return false;
+            }
+        });
 
         $scope.exercises = [];
         $scope.selectedExercises = [];
