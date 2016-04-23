@@ -50,7 +50,7 @@
         $scope.answerDisabled = true;
         $scope.nextDisabled = true;
         $scope.title = '';
-        $scope.repetitionAmount = 0;
+        $scope.repetitionAmount = null;
         $scope.count = 0;
         $scope.leftSide = {
             body: '',
@@ -90,6 +90,7 @@
         }
 
         $scope.autocomplete = {
+            id: 'lesson-angucomplete',
             promise: function (autocomplete, timeoutPromise) {
                 preloader.off();
 
@@ -101,6 +102,15 @@
                 $scope.answer = autocomplete;
 
                 return autocomplete;
+            },
+            clearResults: function () {
+                var answer = $scope.answer;
+
+                $scope.$broadcast('angucomplete-alt:clearInput', $scope.autocomplete.id);
+                $scope.$broadcast('angucomplete-alt:changeInput', $scope.autocomplete.id, answer);
+            },
+            clearInput: function () {
+                $scope.$broadcast('angucomplete-alt:clearInput', $scope.autocomplete.id);
             }
         };
 
@@ -111,7 +121,7 @@
 
             $scope.currentExercise = $scope.exercises.splice(Math.floor(Math.random() * $scope.exercises.length), 1)[0];
 
-            $scope.$broadcast('angucomplete-alt:clearInput', 'lesson-angucomplete');
+            $scope.autocomplete.clearInput();
             $scope.answerDisabled = false;
 
             if (! $scope.exercises.length) {
@@ -133,7 +143,7 @@
                     for (var i = 0, size = $scope.currentExercise.translations.length; i < size; i++) {
                         if (
                             ($scope.currentExercise.translations[i].used) &&
-                            ($scope.currentExercise.translations[i].body === $scope.answer)
+                            ($scope.currentExercise.translations[i].body.toLowerCase() === $scope.answer.toLowerCase())
                         ) {
                             result = true;
 
@@ -146,6 +156,7 @@
                         $scope.currentExercise.put({up: true}).then(
                             function () {
                                 $scope.repetitionAmount--;
+                                $scope.autocomplete.clearResults();
                                 $scope.answerDisabled = true;
                                 $scope.rightSide.success = true;
                                 $scope.rightSide.invisible = false;
@@ -156,6 +167,7 @@
                             }
                         );
                     } else {
+                        $scope.autocomplete.clearResults();
                         $scope.answerDisabled = true;
                         $scope.rightSide.error = true;
                         $scope.rightSide.invisible = false;
@@ -165,11 +177,12 @@
                     break;
 
                 case 'native-foreign':
-                    if ($scope.currentExercise.word === $scope.answer) {
+                    if ($scope.currentExercise.word.toLowerCase() === $scope.answer.toLowerCase()) {
                         preloader.off();
                         $scope.currentExercise.put({up: true}).then(
                             function () {
                                 $scope.repetitionAmount--;
+                                $scope.autocomplete.clearResults();
                                 $scope.answerDisabled = true;
                                 $scope.rightSide.success = true;
                                 $scope.rightSide.invisible = false;
@@ -180,6 +193,7 @@
                             }
                         );
                     } else {
+                        $scope.autocomplete.clearResults();
                         $scope.answerDisabled = true;
                         $scope.rightSide.error = true;
                         $scope.rightSide.invisible = false;
@@ -190,9 +204,10 @@
 
                 case 'repetition':
                     preloader.off();
-                    if ($scope.currentExercise.word === $scope.answer) {
+                    if ($scope.currentExercise.word.toLowerCase() === $scope.answer.toLowerCase()) {
                         $scope.currentExercise.put({old: true}).then(
                             function () {
+                                $scope.autocomplete.clearResults();
                                 $scope.answerDisabled = true;
                                 $scope.rightSide.success = true;
                                 $scope.rightSide.invisible = false;
@@ -205,6 +220,7 @@
                     } else {
                         $scope.currentExercise.put({new: true}).then(
                             function () {
+                                $scope.autocomplete.clearResults();
                                 $scope.answerDisabled = true;
                                 $scope.rightSide.error = true;
                                 $scope.rightSide.invisible = false;
@@ -238,8 +254,8 @@
                         break;
                 }
 
-                $scope.pushNextExercise();
                 $scope.nextDisabled = false;
+                $scope.pushNextExercise();
             },
             function () {
                 $scope.title = 'There aren\'t exercises.'

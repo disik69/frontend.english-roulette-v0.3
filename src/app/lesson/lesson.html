@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-2"><h3 class="text-center">{{count}}</h3></div>
-    <div class="col-xs-8"><h3 class="text-center">{{title}}<span ng-show="repetitionAmount">: <strong>{{repetitionAmount}}</strong></span></h3></div>
+    <div class="col-xs-8"><h3 class="text-center">{{title}}<span ng-show="repetitionAmount !== null">: <strong>{{repetitionAmount}}</strong></span></h3></div>
 </div>
 <div class="row">
     <div class="col-xs-6 text-center left-side" ng-class="{'lesson-word': leftSide.word, 'lesson-translation': leftSide.translation}">
@@ -13,7 +13,7 @@
 <div class="row lesson-driver">
     <div class="col-xs-offset-4 col-xs-4">
         <angucomplete-alt
-                      id="lesson-angucomplete"
+                      id="{{autocomplete.id}}"
                       minlength="1"
                       placeholder="{{autocomplete.placeholder}}"
                       pause="500"

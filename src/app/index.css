@@ -51,3 +51,7 @@ footer > p {
 .custom-modal-backdrop {
     opacity: .3 !important;
 }
+
+.angucomplete-dropdown {
+    z-index: 1005;
+}

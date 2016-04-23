@@ -7,7 +7,7 @@
 }
 
 .lesson-driver {
-    margin-bottom: 50px;
+    margin-bottom: 200px;
 }
 
 .left-side span, .right-side span {
@@ -25,10 +25,6 @@
 
 .right-side .lesson-error {
     background-color: #da3f3f;
-}
-
-#lesson-angucomplete_dropdown {
-    z-index: 1005;
 }
 
 
