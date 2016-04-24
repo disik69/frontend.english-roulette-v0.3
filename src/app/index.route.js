@@ -15,7 +15,7 @@
                 controller: 'SignupController',
                 resolve: {
                     porter: function (porter) {
-                        return porter.get('guest')
+                        return porter('guest')
                     }
                 }
             })
@@ -25,7 +25,7 @@
                 controller: 'SigninController',
                 resolve: {
                     porter: function (porter) {
-                        return porter.get('guest')
+                        return porter('guest')
                     }
                 }
             })
@@ -35,7 +35,27 @@
                 controller: 'DictionaryController',
                 resolve: {
                      porter: function (porter) {
-                         return porter.get('user');
+                         return porter('user');
+                     }
+                }
+            })
+            .state('config', {
+                url: '/config',
+                templateUrl: 'app/config/config.html',
+                controller: 'ConfigController',
+                resolve: {
+                     porter: function (porter) {
+                         return porter('user');
+                     }
+                }
+            })
+            .state('admin', {
+                url: '/admin',
+                templateUrl: 'app/admin/admin.html',
+                controller: 'AdminController',
+                resolve: {
+                     porter: function (porter) {
+                         return porter('admin');
                      }
                 }
             })
@@ -45,7 +65,7 @@
                 controller: 'LessonController',
                 resolve: {
                      porter: function (porter) {
-                         return porter.get('user');
+                         return porter('user');
                      }
                 }
             })
@@ -55,7 +75,7 @@
                 controller: 'LessonController',
                 resolve: {
                      porter: function (porter) {
-                         return porter.get('user');
+                         return porter('user');
                      }
                 }
             })
@@ -65,7 +85,7 @@
                 controller: 'LessonController',
                 resolve: {
                      porter: function (porter) {
-                         return porter.get('user');
+                         return porter('user');
                      }
                 }
             });

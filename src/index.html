@@ -62,14 +62,14 @@
                                 <li ui-sref-active="active"><a ui-sref="repetition">Repetition</a></li>
                             </ul>
                         </li>
+                        <li ui-sref-active="active" ng-show="isAdmin()"><a ui-sref="admin">Admin</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right" ng-show="isUser() || isAdmin()">
+                    <ul class="nav navbar-nav navbar-right" ng-shoe="isUser() || isAdmin()">
                         <li class="dropdown" global-dropdown-menu="collapseCycle">
                             <a class="dropdown-toggle" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{passport.name}}</a>
                             <ul class="dropdown-menu">
-                                <li ng-show="isUser()"><a>for user...</a></li>
-                                <li ng-show="isAdmin()"><a>for admin...</a></li>
-                                <li role="separator" class="divider"></li>
+                                <li ui-sref-active="active" ng-show="isUser()"><a ui-sref="config">Config</a></li>
+                                <li ng-show="isUser()" role="separator" class="divider"></li>
                                 <li role="button"><a ng-click="signout()">Signout</a></li>
                             </ul>
                         </li>

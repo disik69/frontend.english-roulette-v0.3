@@ -6,7 +6,7 @@
         .controller('NavbarController', NavbarController);
 
     /** @ngInject */
-    function NavbarController($scope, $log, passport, $state, $localStorage)
+    function NavbarController($scope, $log, passport, $state, $localStorage, $http, backendUrl)
     {
         $scope.passport = passport;
         $scope.minimizeCollapsed = true;
@@ -16,19 +16,26 @@
         };
 
         $scope.isGuest = function () {
-            return $scope.passport.roles.indexOf('guest') !== -1;
+            return passport.hasRole('guest');
         };
 
         $scope.isUser = function () {
-            return $scope.passport.roles.indexOf('user') !== -1;
+            return passport.hasRole('user');
         };
 
         $scope.isAdmin = function () {
-            return $scope.passport.roles.indexOf('admin') !== -1;
+            return passport.hasRole('admin');
         };
 
         $scope.signout = function () {
+            $http({
+                method: 'POST',
+                url: backendUrl + '/signout',
+                params: {token: $localStorage.accessToken}
+            });
+
             delete $localStorage.accessToken;
+
             $state.go('signin');
         };
     }

@@ -6,7 +6,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $log, $state, Restangular, $localStorage)
+    function runBlock($rootScope, $log, $state, Restangular, $localStorage, passport)
     {
         $rootScope.thisTime = Date.now();
 
@@ -27,21 +27,24 @@
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
             switch (error) {
                 case 'guest':
-                    $state.go('dictionary');
+                    if (passport.hasRole('user')) {
+                        $state.go('dictionary');
+                    } else if (passport.hasRole('admin')) {
+                        $state.go('admin');
+                    }
+
                     break;
 
                 case 'user':
-                    $state.go('signin');
-                    break;
-
                 case 'admin':
+                    $state.go('signin');
                     break;
             }
         });
 
         Restangular.setFullResponse(true);
 
-        Restangular.setFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
+        Restangular.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
 
             params = angular.merge(params, {token: $localStorage.accessToken});
 
@@ -50,6 +53,12 @@
                 params: params,
                 headers: headers,
                 httpConfig: httpConfig
+            }
+        });
+
+        Restangular.setErrorInterceptor(function (response, deferred, responseHandler) {
+            if (response.status === 401) {
+                $state.go('signin');
             }
         });
     }

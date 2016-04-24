@@ -6,7 +6,7 @@
         .controller('SigninController', SigninController);
 
     /** @ngInject */
-    function SigninController($scope, $log, $http, backendUrl, $localStorage, $state, resetForm, lockedCallback)
+    function SigninController($scope, $log, $http, backendUrl, $localStorage, $state, resetForm, lockedCallback, notary, passport)
     {
         $scope.alerts = [];
 
@@ -25,7 +25,15 @@
                 function (response) {
                     $localStorage.accessToken = response.data.token;
 
-                    $state.go('dictionary');
+                    notary().then(
+                        function () {
+                            if (passport.hasRole('user')) {
+                                $state.go('dictionary');
+                            } else if (passport.hasRole('admin')) {
+                                $state.go('admin');
+                            }
+                        }
+                    );
                 },
                 function (response) {
                     resetForm($scope.signinForm);
