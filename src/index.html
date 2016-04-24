@@ -64,7 +64,7 @@
                         </li>
                         <li ui-sref-active="active" ng-show="isAdmin()"><a ui-sref="admin">Admin</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right" ng-shoe="isUser() || isAdmin()">
+                    <ul class="nav navbar-nav navbar-right" ng-show="isUser() || isAdmin()">
                         <li class="dropdown" global-dropdown-menu="collapseCycle">
                             <a class="dropdown-toggle" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{passport.name}}</a>
                             <ul class="dropdown-menu">
