@@ -19,7 +19,7 @@
 
                             $http({
                                 method: 'GET',
-                                url: backendUrl + '/check-email',
+                                url: backendUrl + '/check-email' + (attrs.uniqueEmail ? '/' + attrs.uniqueEmail : ''),
                                 params: {
                                     email: email
                                 }
@@ -50,7 +50,7 @@
             link: function(scope, element, attrs, controller) {
                 controller.$parsers.unshift(
                     function (repeatedPassword) {
-                        if (repeatedPassword && repeatedPassword == scope.$eval(attrs.repeatedPassword)) {
+                        if (repeatedPassword && repeatedPassword === scope.$eval(attrs.repeatedPassword)) {
                             controller.$setValidity('repeated-password', true);
                         } else {
                             controller.$setValidity('repeated-password', false);
@@ -61,7 +61,7 @@
                 );
 
                 scope.$watch(attrs.repeatedPassword, function (password) {
-                    if (password && password == controller.$modelValue) {
+                    if (password && password === controller.$modelValue) {
                         controller.$setValidity('repeated-password', true);
                     } else {
                         controller.$setValidity('repeated-password', false);

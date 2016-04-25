@@ -38,11 +38,11 @@
                         $scope.resetCaptchaSrc();
 
                         $scope.user.password = null;
-                        $scope.signupForm.password.$setPristine()
+                        $scope.signupForm.password.$setPristine();
                         $scope.user.captcha = null;
-                        $scope.signupForm.captcha.$setPristine()
+                        $scope.signupForm.captcha.$setPristine();
                         $scope.repeatedPassword = null;
-                        $scope.signupForm['repeated-password'].$setPristine()
+                        $scope.signupForm['repeated-password'].$setPristine();
 
                         for (var errorIndex in response.data.errors) {
                             $scope.alerts.push({type: 'danger', msg: response.data.errors[errorIndex]});
@@ -54,7 +54,7 @@
                     }
                 );
             } else {
-                $scope.alerts.push({type: 'warning', msg: 'Some or all fields are invalid'});
+                $scope.alerts.push({type: 'warning', msg: 'Some or all fields are invalid.'});
             }
         });
     }

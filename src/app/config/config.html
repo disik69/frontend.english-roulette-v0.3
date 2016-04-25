@@ -1,1 +1,63 @@
-config
+<div class="row">
+    <div class="col-xs-offset-4 col-xs-4">
+        <div class="row" alert-stack></div>
+    </div>
+</div>
+<div class="row">
+    <div  class="col-xs-offset-4 col-xs-4">
+        <form name="configForm" class="form-horizontal" novalidate ng-submit="config.execute()">
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Name</label>
+                <div class="input-group">
+                    <input type="text" name="name" required maxlength="100" ng-model="user.name" class="form-control">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Email</label>
+                <div class="input-group">
+                    <input type="text" name="email" required maxlength="60" ng-model="user.email" unique-email="{{userId}}" class="form-control">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Lesson size</label>
+                <div class="input-group">
+                    <input type="number" min="1" max="100" class="form-control" name="lesson-size" ng-model="user.lessonSize" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Reading count</label>
+                <div class="input-group">
+                    <input type="number" min="1" max="100" class="form-control" name="readin-count" ng-model="user.readingCount" required placeholder="reading count">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Memory count</label>
+                <div class="input-group">
+                    <input type="number" min="1" max="100" class="form-control" name="memory-count" ng-model="user.memoryCount" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Repeat term</label>
+                <div class="input-group">
+                    <input type="number" min="1" max="365" class="form-control" name="repeat-term" ng-model="user.repeatTerm" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-4">
+                    <input type="button" value="Revert" ng-disabled="! userChanged" ng-click="revert()" class="form-control btn btn-warning">
+                </div>
+                <div class="col-xs-4">
+                    <input type="submit" value="OK" class="form-control btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
