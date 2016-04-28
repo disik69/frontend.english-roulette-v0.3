@@ -50,7 +50,7 @@
         <label><input type="checkbox" ng-model="selectedExercises[$index]">{{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span></label>
     </div>
     <div class="col-xs-4 dictionary-translation-list" ng-click="changeTranslation($index)">
-        <span ng-repeat="translation in exercise.translations | filter:{used: true}  track by translation.id">{{translation.body}}<span ng-if="! $last">, </span></span>
+        <span ng-repeat="translation in exercise.translations | filter:{used: true}  track by translation.id">{{translation.body}}</span>
     </div>
     <div class="col-xs-1">
         <span ng-if="exercise.status == 'new'">{{exercise.reading}}</span><span ng-if="exercise.status == 'old'">-</span>
