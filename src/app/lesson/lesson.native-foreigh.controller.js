@@ -3,14 +3,14 @@
 
     angular
         .module('frontendEnglishRouletteV03')
-        .controller('LessonController', LessonController);
+        .controller('LessonNativeForeignController', LessonNativeForeignController);
 
     /** @ngInject */
-    function LessonController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $timeout, $state, fillArray)
+    function LessonNativeForeignController($scope, $rootScope, Restangular, $log, preloader, lockedCallback, $q, $timeout, $state, fillArray)
     {
         var state = $state.current.name;
         var autocompleteSource = '';
-        var exerciseParam = '';
+        var exerciseParam = {};
         var exercise = Restangular.all('exercise');
 
         var autocompleteResultWatcher = function (newValue) {
@@ -110,6 +110,7 @@
                 $scope.$broadcast('angucomplete-alt:changeInput', $scope.autocomplete.id, answer);
             },
             clearInput: function () {
+                $scope.answer = '';
                 $scope.$broadcast('angucomplete-alt:clearInput', $scope.autocomplete.id);
             }
         };

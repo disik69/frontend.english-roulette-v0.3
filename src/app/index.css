@@ -55,3 +55,7 @@ footer > p {
 .angucomplete-dropdown {
     z-index: 1005;
 }
+
+.translation-list > span:not(:last-child):after {
+    content: ', ';
+}

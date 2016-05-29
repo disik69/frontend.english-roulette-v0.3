@@ -10,7 +10,7 @@
     margin-bottom: 200px;
 }
 
-.left-side span, .right-side span {
+.left-side > span, .right-side > span{
     background-color: #000;
     border-radius: 4px;
     color: #fff;
@@ -25,6 +25,25 @@
 
 .right-side .lesson-error {
     background-color: #da3f3f;
+}
+
+.right-side label {
+    display: inline-block;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.right-side:not(.after-play) label:hover {
+    background-color: #ccc;
+}
+
+.after-play label.lesson-correct {
+    color: #000;
+    font-weight: 600;
+}
+
+.after-play label.lesson-wrong  {
+    color: #bbb;
 }
 
 
