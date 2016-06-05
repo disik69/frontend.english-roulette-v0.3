@@ -49,7 +49,7 @@
     <div class="col-xs-offset-1 col-xs-3 checkbox">
         <label><input type="checkbox" ng-model="selectedExercises[$index]">{{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span></label>
     </div>
-    <div class="col-xs-4 dictionary-translation-list translation-list" ng-click="changeTranslation($index)">
+    <div class="col-xs-4 dictionary-translation-list" ng-click="changeTranslation($index)">
         <span ng-repeat="translation in exercise.translations | filter:{used: true}  track by translation.id">{{translation.body}}</span>
     </div>
     <div class="col-xs-1">
@@ -76,7 +76,7 @@
     </div>
 </div>
 <div ng-show="exerciseListEmpty" class="row dictionary-empty">
-    There aren't exercises.
+    There aren't any exercises.
 </div>
 <div class="row dictionary-pagination-preloader">
     <img class="center-block" src="assets/images/32-preloader.gif" alt="preloader">

@@ -61,8 +61,8 @@
             })
             .state('foreign-native', {
                 url: '/foreign-native',
-                templateUrl: 'app/lesson/lesson.foreign-native.html',
-                controller: 'LessonForeignNativeController',
+                templateUrl: 'app/lesson/lesson.html',
+                controller: 'LessonController',
                 resolve: {
                      porter: function (porter) {
                          return porter('user');
@@ -71,8 +71,8 @@
             })
             .state('native-foreign', {
                 url: '/native-foreign',
-                templateUrl: 'app/lesson/lesson.native-foreign.html',
-                controller: 'LessonNativeForeignController',
+                templateUrl: 'app/lesson/lesson.html',
+                controller: 'LessonController',
                 resolve: {
                      porter: function (porter) {
                          return porter('user');
@@ -81,8 +81,8 @@
             })
             .state('repetition', {
                 url: '/repetition',
-                templateUrl: 'app/lesson/lesson.native-foreign.html',
-                controller: 'LessonNativeForeignController',
+                templateUrl: 'app/lesson/lesson.html',
+                controller: 'LessonController',
                 resolve: {
                      porter: function (porter) {
                          return porter('user');

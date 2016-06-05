@@ -117,6 +117,10 @@
     border-radius: 4px;
 }
 
+.dictionary-translation-list > :not(:last-child):after {
+    content: ', ';
+}
+
 .dictionary-translation-list:hover {
     background-color: #ccc;
 }
