@@ -19,7 +19,7 @@
 
 .right-side span {
     color: #000;
-    border: 1px solid black;
+    box-shadow: 0 0 5px;
 }
 
 .left-side span {
