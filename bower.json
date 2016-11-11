@@ -27,7 +27,7 @@
   "overrides": {
     "bootstrap": {
       "main": [
-        "dist/css/bootstrap.css",
+        "less/bootstrap.less",
         "dist/fonts/glyphicons-halflings-regular.eot",
         "dist/fonts/glyphicons-halflings-regular.svg",
         "dist/fonts/glyphicons-halflings-regular.ttf",
