@@ -110,7 +110,7 @@
 
         $rootScope.$on('documentScroll', function (event, scroll) {
             var $ = angular.element;
-            var $dictionaryWordQuery = $('.dictionary-word-query');
+            var $dictionaryWordQuery = $('.dictionary-word-query-body');
 
             if (scroll >= $('nav').innerHeight()) {
                 $dictionaryWordQuery.addClass('dictionary-word-query-fixed container');

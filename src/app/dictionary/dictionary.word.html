@@ -1,36 +1,36 @@
 <div class="container-fluid dictionary-word-modal">
     <div class="dictionary-word-divider" ng-repeat="word in words">
-        <div class="row dictionary-word">
+        <div class="row dictionary-word-wrap">
             <div class="col-xs-6 dictionary-word-body" ng-class="{'text-muted': word.used}">
                 <div class="checkbox">
                     <label><input type="checkbox" ng-model="selectedWords[$index].selected" ng-init="selectedWord = selectedWords[$index]" ng-disabled="word.used">{{word.body}} <span ng-if="word.position">[{{word.ts}}] <em>{{word.position}}</em></span></label>
                 </div>
             </div>
             <div class="col-xs-6" ng-class="{'text-muted': word.used || (! selectedWord.selected)}">
-                <div class="row dictionary-translation" ng-repeat="translation in word.translations">
+                <div class="row dictionary-word-translation" ng-repeat="translation in word.translations">
                     <div class="col-xs-12 checkbox"><label><input type="checkbox" ng-model="selectedWord.selectedTranslations[$index]" ng-disabled="word.used || (! selectedWord.selected)">{{translation.body}}</label></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="dictionary-word-divider">
-        <div class="row dictionary-word">
+        <div class="row dictionary-word-wrap">
             <div class="col-xs-6 dictionary-word-body">
                 <div class="checkbox">
                     <label><input type="checkbox" ng-model="customWordEnabled">{{wordQuery}}</label>
                 </div>
             </div>
             <div class="col-xs-6">
-                <div class="row dictionary-translation" ng-repeat="customTranslation in customTranslations">
+                <div class="row dictionary-word-translation" ng-repeat="customTranslation in customTranslations">
                     <div class="col-xs-12">
-                        <div class="dictionary-custom-translation" ng-class="{'text-muted': (! customWordEnabled)}">{{customTranslation}}</div>
-                        <button class="btn btn-default dictionary-custom-translation-btn" ng-click="removeCustomTranslation($index)" ng-disabled="! customWordEnabled"><span class="glyphicon glyphicon-minus"></span></button>
+                        <div class="dictionary-word-custom-translation" ng-class="{'text-muted': (! customWordEnabled)}">{{customTranslation}}</div>
+                        <button class="btn btn-default dictionary-word-custom-translation-btn" ng-click="removeCustomTranslation($index)" ng-disabled="! customWordEnabled"><span class="glyphicon glyphicon-minus"></span></button>
                     </div>
                 </div>
-                <div class="row dictionary-translation">
+                <div class="row dictionary-word-translation">
                     <div class="col-xs-12">
-                        <input type="text" class="form-control dictionary-custom-translation-field" ng-model="customTranslationRaw" ng-keyup="keyupAddCustomTranslation($event)" ng-disabled="! customWordEnabled">
-                        <button class="btn btn-default dictionary-custom-translation-btn" ng-click="addCustomTranslation()" ng-disabled="! customWordEnabled"><span class="glyphicon glyphicon-plus"></span></button>
+                        <input type="text" class="form-control dictionary-word-custom-translation-field" ng-model="customTranslationRaw" ng-keyup="keyupAddCustomTranslation($event)" ng-disabled="! customWordEnabled">
+                        <button class="btn btn-default dictionary-word-custom-translation-btn" ng-click="addCustomTranslation()" ng-disabled="! customWordEnabled"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                 </div>
             </div>

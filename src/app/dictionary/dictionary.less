@@ -1,133 +1,142 @@
-.dictionary-word-query-wrap {
-    height: 46px;
-}
+.dictionary {
+    &-word-query {
+        height: 46px;
 
-.dictionary-word-query {
-    float: left;
-    padding: 5px 0;
-    border-radius: 4px;
-    background-color: #ccc;
-    border: 1px solid #aaa;
-}
+        &-body {
+            float: left;
+            padding: 5px 0;
+            border-radius: 4px;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+        }
 
-.dictionary-word-query:not(.dictionary-word-query-fixed) {
-    width: 100%;
-}
 
-@media (max-width: 767px) {
-    .dictionary-word-query.dictionary-word-query-fixed {
-        width: 100%;
+        &-body:not(&-fixed) {
+            width: 100%;
+        }
+
+        @media (max-width: 767px) {
+            &&-fixed {
+                width: 100%;
+            }
+        }
+
+        &-body&-fixed {
+            position: fixed;
+            z-index: 1010;
+            top: 20px;
+        }
+
+        &-preloader {
+            position: absolute;
+            z-index: 1000;
+            top: 9px;
+            right: 55px;
+            background: white;
+            display: none;
+        }
+    }
+
+    &-head {
+        margin-top: 13px;
+        border-bottom: 1px solid #888;
+        padding-bottom: 10px;
+    }
+
+    &-head, &-exercise, &-pagination-preloader, &-empty {
+        margin-bottom: 15px;
+    }
+
+    &-pagination-preloader, &-word-preloader, &-translation-preloader {
+        display: none;
+    }
+
+    &-empty {
+        text-align: center;
+        color: #ff3e3e;
+    }
+
+    &-word {
+        &-modal {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        &-wrap {
+            padding-top: 7px;
+            padding-bottom: 7px;
+
+            :focus {
+                outline: none;
+            }
+        }
+
+
+        &-body {
+            margin-top: 5px;
+        }
+
+        &-translation {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        &-divider {
+            border-bottom: 3px double #888;
+        }
+
+        &-driver {
+            padding-top: 15px;
+            padding-bottom: 7px;
+        }
+
+
+        &-custom-translation {
+            float: left;
+            padding: 2px 0 0 6px;
+            width: 60%;
+
+            &-field {
+                float: left;
+                height: 24px;
+                padding: 1px 5px;
+                width: 60%;
+            }
+
+            &-btn {
+                height: 24px;
+                display: block;
+                float: left;
+                padding: 1px 5px;
+                margin-left: 5px;
+                width: 30px;
+            }
+        }
+
+    }
+
+    &-exercise .checkbox, &-head .checkbox, &-word-wrap .checkbox {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &-translation-list {
+        border-radius: 4px;
+
+        > :not(:last-child):after {
+            content: ', ';
+        }
+
+        &:hover {
+            background-color: #ccc;
+        }
+
+        &:focus {
+            outline: none;
+        }
     }
 }
 
-.dictionary-word-query.dictionary-word-query-fixed {
-    position: fixed;
-    z-index: 1010;
-    top: 20px;
-}
-
-.dictionary-head {
-    margin-top: 13px;
-    border-bottom: 1px solid #888;
-    padding-bottom: 10px;
-}
-
-.dictionary-head, .dictionary-exercise, .dictionary-pagination-preloader, .dictionary-empty {
-    margin-bottom: 15px;
-}
-
-.dictionary-pagination-preloader, .dictionary-word-preloader, .dictionary-translation-preloader {
-    display: none;
-}
-
-.dictionary-empty {
-    text-align: center;
-    color: #ff3e3e;
-}
-
-.dictionary-word-modal {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.dictionary-word {
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-
-.dictionary-word :focus {
-    outline: none;
-}
-
-.dictionary-exercise .checkbox, .dictionary-head .checkbox, .dictionary-word .checkbox {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.dictionary-word-body {
-    margin-top: 5px;
-}
-
-.dictionary-translation {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.dictionary-word-divider {
-    border-bottom: 3px double #888;
-}
-
-.dictionary-word-driver {
-    padding-top: 15px;
-    padding-bottom: 7px;
-}
-
-.dictionary-word-query-preloader {
-    position: absolute;
-    z-index: 1000;
-    top: 9px;
-    right: 55px;
-    background: white;
-    display: none;
-}
-
-.dictionary-custom-translation-field {
-    float: left;
-    height: 24px;
-    padding: 1px 5px;
-    width: 60%;
-}
-
-.dictionary-custom-translation {
-    float: left;
-    padding: 2px 0 0 6px;
-    width: 60%;
-}
-
-.dictionary-custom-translation-btn {
-    height: 24px;
-    display: block;
-    float: left;
-    padding: 1px 5px;
-    margin-left: 5px;
-    width: 30px;
-}
-
-.dictionary-translation-list {
-    border-radius: 4px;
-}
-
-.dictionary-translation-list > :not(:last-child):after {
-    content: ', ';
-}
-
-.dictionary-translation-list:hover {
-    background-color: #ccc;
-}
-
-.dictionary-translation-list:focus {
-    outline: none;
-}
 
 
 

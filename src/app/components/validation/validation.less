@@ -1,11 +1,25 @@
-.ng-pristine + span > span.glyphicon-ok, .ng-pristine + span > span.glyphicon-remove {
-    display: none;
+.ng-pristine + span > span.glyphicon {
+    &-ok, &-remove {
+        display: none;
+    }
 }
 
-.ng-valid + span > .glyphicon-ok, .ng-invalid + span > .glyphicon-remove {
-    display: inherit;
+.ng-valid + span > .glyphicon {
+    &-ok {
+       display: inherit;
+    }
+
+    &-remove {
+        display: none;
+    }
 }
 
-.ng-valid + span > .glyphicon-remove, .ng-invalid + span > .glyphicon-ok {
-    display: none;
+.ng-invalid + span > .glyphicon {
+    &-ok {
+       display: none;
+    }
+
+    &-remove {
+        display: inherit;
+    }
 }
