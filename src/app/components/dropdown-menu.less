@@ -1,0 +1,19 @@
+.dropdown {
+    &.open .dropdown-menu {
+        .scale(1);
+        opacity: 1;
+    }
+
+    .dropdown-menu {
+        .transform-origin(top left);
+        .transition(all .5s);
+        .scale(0);
+        opacity: 0;
+        min-width: initial;
+        display: block;
+    }
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: -5px;
+}

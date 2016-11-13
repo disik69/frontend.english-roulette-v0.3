@@ -3,12 +3,12 @@
         <div class="row dictionary-word-wrap">
             <div class="col-xs-6 dictionary-word-body" ng-class="{'text-muted': word.used}">
                 <div class="checkbox">
-                    <label><input type="checkbox" ng-model="selectedWords[$index].selected" ng-init="selectedWord = selectedWords[$index]" ng-disabled="word.used">{{word.body}} <span ng-if="word.position">[{{word.ts}}] <em>{{word.position}}</em></span></label>
+                    <label><input type="checkbox" ng-model="selectedWords[$index].selected" ng-init="selectedWord = selectedWords[$index]" ng-disabled="word.used"><i class="input-helper"></i>{{word.body}} <span ng-if="word.position">[{{word.ts}}] <em>{{word.position}}</em></span></label>
                 </div>
             </div>
             <div class="col-xs-6" ng-class="{'text-muted': word.used || (! selectedWord.selected)}">
                 <div class="row dictionary-word-translation" ng-repeat="translation in word.translations">
-                    <div class="col-xs-12 checkbox"><label><input type="checkbox" ng-model="selectedWord.selectedTranslations[$index]" ng-disabled="word.used || (! selectedWord.selected)">{{translation.body}}</label></div>
+                    <div class="col-xs-12 checkbox"><label><input type="checkbox" ng-model="selectedWord.selectedTranslations[$index]" ng-disabled="word.used || (! selectedWord.selected)"><i class="input-helper"></i>{{translation.body}}</label></div>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
         <div class="row dictionary-word-wrap">
             <div class="col-xs-6 dictionary-word-body">
                 <div class="checkbox">
-                    <label><input type="checkbox" ng-model="customWordEnabled">{{wordQuery}}</label>
+                    <label><input type="checkbox" ng-model="customWordEnabled"><i class="input-helper"></i>{{wordQuery}}</label>
                 </div>
             </div>
             <div class="col-xs-6">

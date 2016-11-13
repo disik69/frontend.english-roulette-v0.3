@@ -6,7 +6,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $log, $state, Restangular, $localStorage, passport)
+    function runBlock($rootScope, $log, $state, Restangular, $localStorage, passport, wavesEffect)
     {
         $rootScope.thisTime = Date.now();
 
@@ -61,5 +61,7 @@
                 $state.go('signin');
             }
         });
+
+        wavesEffect.init();
     }
 })();

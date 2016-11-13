@@ -1,11 +1,11 @@
 <div class="row dictionary-word-query">
     <div class="dictionary-word-query-body">
         <div class="col-xs-1">
-            <div ng-if="groupActionMenuShowed" class="dropdown" global-dropdown-menu="collapseCycle">
-              <button class="btn btn-default dropdown-toggle">
+            <div ng-if="groupActionMenuShowed" class="dropdown" uib-dropdown>
+              <button class="btn btn-default dropdown-toggle" uib-dropdown-toggle>
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu dropdown-menu-resp">
+              <ul class="dropdown-menu dropdown-menu-resp" uib-dropdown-menu>
                 <li><a role="button" ng-click="changeExerciseStatusChain(null, {new: 1})"><span class="glyphicon glyphicon-repeat"></span></a></li>
                 <li><a role="button" ng-click="changeExerciseStatusChain(null, {old: 1})"><span class="glyphicon glyphicon-ok"></span></a></li>
                 <li><a role="button" ng-click="removeExerciseChain()"><span class="glyphicon glyphicon-trash"></span></a></li>
@@ -27,7 +27,7 @@
 </div>
 <div class="row dictionary-head">
     <div class="col-xs-offset-1 col-xs-3 checkbox">
-        <label><input type="checkbox" ng-model="allExercisesSelected"><strong>Word</strong></label>
+        <label><input type="checkbox" ng-model="allExercisesSelected"><i class="input-helper"></i><strong>Word</strong></label>
     </div>
     <div class="col-xs-4">
         <strong>Translation</strong>
@@ -47,7 +47,7 @@
 </div>
 <div class="row dictionary-exercise" ng-repeat="exercise in exercises track by exercise.id">
     <div class="col-xs-offset-1 col-xs-3 checkbox">
-        <label><input type="checkbox" ng-model="selectedExercises[$index]">{{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span></label>
+        <label><input type="checkbox" ng-model="selectedExercises[$index]"><i class="input-helper"></i>{{exercise.word}} <span ng-if="exercise.position">[{{exercise.ts}}] <em>{{exercise.position}}</em></span></label>
     </div>
     <div class="col-xs-4 dictionary-translation-list" ng-click="changeTranslation($index)">
         <span ng-repeat="translation in exercise.translations | filter:{used: true}  track by translation.id">{{translation.body}}</span>
@@ -62,12 +62,12 @@
         {{exercise.check_at | strToDate:'d MMMM':'-'}}
     </div>
     <div class="col-xs-1">
-        <div class="dropdown" global-dropdown-menu="collapseCycle">
-          <button class="btn btn-default dropdown-toggle">
+        <div class="dropdown" uib-dropdown>
+          <button class="btn btn-default dropdown-toggle" uib-dropdown-toggle>
             <span ng-if="exercise.status == 'old'" class="glyphicon glyphicon-ok"></span>
             <span ng-if="exercise.status == 'new'" class="glyphicon glyphicon-repeat"></span>
           </button>
-          <ul class="dropdown-menu dropdown-menu-resp">
+          <ul class="dropdown-menu dropdown-menu-resp" uib-dropdown-menu>
             <li ng-if="exercise.status == 'new'"><a role="button" ng-click="changeExerciseStatus($index, {old: 1})"><span class="glyphicon glyphicon-ok"></span></a></li>
             <li ng-if="exercise.status == 'old'"><a role="button" ng-click="changeExerciseStatus($index, {new: 1})"><span class="glyphicon glyphicon-repeat"></span></a></li>
             <li><a role="button" ng-click="removeExercise($index)"><span class="glyphicon glyphicon-trash"></span></a></li>

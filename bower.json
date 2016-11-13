@@ -19,7 +19,9 @@
     "animate.css": "~3.4.0",
     "angular": "~1.4.2",
     "ngstorage": "^0.3.10",
-    "angucomplete-alt": "^2.4.0"
+    "angucomplete-alt": "^2.4.0",
+    "Waves": "waves#^0.7.5",
+    "material-design-iconic-font": "^2.2.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
